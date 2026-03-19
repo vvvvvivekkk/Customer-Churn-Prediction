@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Churn Prediction</title>
+    <style>
+        body {
+            font-family: Arial;
+            background: #0f172a;
+            color: white;
+            text-align: center;
+            padding: 30px;
+        }
+        input, button {
+            padding: 10px;
+            margin: 8px;
+            border-radius: 5px;
+            border: none;
+        }
+        button {
+            background: #22c55e;
+            color: white;
+            cursor: pointer;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+
+```
+<h1>📊 Customer Churn Prediction</h1>
+
+<div>
+    <input type="number" id="tenure" placeholder="Tenure"><br>
+    <input type="number" id="MonthlyCharges" placeholder="Monthly Charges"><br>
+    <input type="number" id="TotalCharges" placeholder="Total Charges"><br>
+
+    <button onclick="predict()">Predict</button>
+</div>
+
+<div class="result" id="result"></div>
+
+<script>
+    async function predict() {
+        const data = {
+            tenure: Number(document.getElementById("tenure").value),
+            MonthlyCharges: Number(document.getElementById("MonthlyCharges").value),
+            TotalCharges: Number(document.getElementById("TotalCharges").value)
+        };
+
+        const response = await fetch("http://127.0.0.1:5000/predict", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data)
+        });
+
+        const result = await response.json();
+
+        document.getElementById("result").innerHTML =
+            "Churn: " + (result.churn ? "Yes ⚠️" : "No ✅") +
+            "<br>Probability: " + result.probability.toFixed(2);
+    }
+</script>
+```
+
+</body>
+</html>
