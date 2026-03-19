@@ -45,3 +45,12 @@ plt.gca().invert_yaxis()
 plt.title("Top 15 Feature Importance")
 plt.xlabel("Importance")
 plt.show()
+
+
+import joblib
+
+# Save model
+joblib.dump(model, "../model/churn_model.pkl")
+
+# Save columns
+joblib.dump(X.columns.tolist(), "../model/columns.pkl")
