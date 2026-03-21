@@ -11,7 +11,6 @@ Customer churn prediction helps businesses:
 - Reduce revenue loss
 - Improve customer satisfaction
 
----
 
 ## 📁 Dataset Features
 
